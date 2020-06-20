@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="cmsl" targetNamespace="http://www.massmutual.com/cmsl"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:cmsl="http://www.massmutual.com/cmsl"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+
+	<wsdl:types>
+		<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:cmsl="http://www.massmutual.com/cmsl"
+			targetNamespace="http://www.massmutual.com/cmsl">
+
+			<xsd:include schemaLocation="cmsl.xsd" />
+
+			<xsd:element name="getContentByID">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element ref="cmsl:CMSession" minOccurs="1" maxOccurs="1" />
+						<xsd:element name="contentID" type="xsd:string" minOccurs="1" maxOccurs="1" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getContentByIDResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element ref="cmsl:ResponseContentItem" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+			<xsd:element name="getChannelByID">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element ref="cmsl:CMSession" />
+						<xsd:element name="channelID" nillable="false" type="xsd:string" />
+						<xsd:element name="recursion" type="xsd:int" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+			<xsd:element name="getChannelByIDResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element ref="cmsl:ResponseChannelItem" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+			<xsd:element name="getChannelByPath">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element ref="cmsl:CMSession" />
+						<xsd:element name="channelPath" nillable="false" type="xsd:string" />
+						<xsd:element name="recursion" type="xsd:int" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getChannelByPathResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element ref="cmsl:ResponseChannelItem" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+			<xsd:element name="getByObjectRequest">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element ref="cmsl:CMSession" />
+						<xsd:element ref="cmsl:Request" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getByObjectRequestResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element ref="cmsl:Response" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+			<xsd:element name="getXMLByObjectRequest">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element ref="cmsl:CMSession" />
+						<xsd:element ref="cmsl:Request" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getXMLByObjectRequestResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="getXMLByObjectRequestReturn" nillable="true" type="xsd:string" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+			<xsd:element name="getByXMLRequest">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element ref="cmsl:CMSession" />
+						<xsd:element name="standardXml" nillable="false" type="xsd:string" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getByXMLRequestResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element ref="cmsl:Response" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+			<xsd:element name="getXMLByXMLRequest">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element ref="cmsl:CMSession" />
+						<xsd:element name="standardXML" nillable="false" type="xsd:string" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getXMLByXMLRequestResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="getXMLByXMLRequestReturn" nillable="true" type="xsd:string" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:schema>
+	</wsdl:types>
+
+	<wsdl:message name="getContentByIDRequest">
+		<wsdl:part name="parameters" element="cmsl:getContentByID" />
+	</wsdl:message>
+	<wsdl:message name="getContentByIDResponse">
+		<wsdl:part name="parameters" element="cmsl:getContentByIDResponse" />
+	</wsdl:message>
+
+	<wsdl:message name="getChannelByIDRequest">
+		<wsdl:part name="parameters" element="cmsl:getChannelByID" />
+	</wsdl:message>
+	<wsdl:message name="getChannelByIDResponse">
+		<wsdl:part name="parameters" element="cmsl:getChannelByIDResponse" />
+	</wsdl:message>
+
+	<wsdl:message name="getChannelByPathRequest">
+		<wsdl:part name="parameters" element="cmsl:getChannelByPath" />
+	</wsdl:message>
+	<wsdl:message name="getChannelByPathResponse">
+		<wsdl:part name="parameters" element="cmsl:getChannelByPathResponse" />
+	</wsdl:message>
+
+	<wsdl:message name="getByObjectRequestRequest">
+		<wsdl:part name="parameters" element="cmsl:getByObjectRequest" />
+	</wsdl:message>
+	<wsdl:message name="getByObjectRequestResponse">
+		<wsdl:part name="parameters" element="cmsl:getByObjectRequestResponse" />
+	</wsdl:message>
+
+	<wsdl:message name="getXMLByObjectRequestResponse">
+		<wsdl:part name="parameters" element="cmsl:getXMLByObjectRequestResponse" />
+	</wsdl:message>
+	<wsdl:message name="getXMLByObjectRequestRequest">
+		<wsdl:part name="parameters" element="cmsl:getXMLByObjectRequest" />
+	</wsdl:message>
+
+	<wsdl:message name="getByXMLRequestRequest">
+		<wsdl:part name="parameters" element="cmsl:getByXMLRequest" />
+	</wsdl:message>
+	<wsdl:message name="getByXMLRequestResponse">
+		<wsdl:part name="parameters" element="cmsl:getByXMLRequestResponse" />
+	</wsdl:message>
+
+	<wsdl:message name="getXMLByXMLRequestRequest">
+		<wsdl:part name="parameters" element="cmsl:getXMLByXMLRequest" />
+	</wsdl:message>
+	<wsdl:message name="getXMLByXMLRequestResponse">
+		<wsdl:part name="parameters" element="cmsl:getXMLByXMLRequestResponse" />
+	</wsdl:message>
+
+	<wsdl:portType name="ContentManagementServicePortType">
+
+		<wsdl:operation name="getContentByID">
+			<wsdl:input name="getContentByIDRequest" message="cmsl:getContentByIDRequest" />
+			<wsdl:output name="getContentByIDResponse" message="cmsl:getContentByIDResponse" />
+		</wsdl:operation>
+
+		<wsdl:operation name="getChannelByID">
+			<wsdl:input name="getChannelByIDRequest" message="cmsl:getChannelByIDRequest" />
+			<wsdl:output name="getChannelByIDResponse" message="cmsl:getChannelByIDResponse" />
+		</wsdl:operation>
+
+		<wsdl:operation name="getChannelByPath">
+			<wsdl:input name="getChannelByPathRequest" message="cmsl:getChannelByPathRequest" />
+			<wsdl:output name="getChannelByPathResponse" message="cmsl:getChannelByPathResponse" />
+		</wsdl:operation>
+
+		<wsdl:operation name="getByObjectRequest">
+			<wsdl:input name="getByObjectRequestRequest" message="cmsl:getByObjectRequestRequest" />
+			<wsdl:output name="getByObjectRequestResponse" message="cmsl:getByObjectRequestResponse" />
+		</wsdl:operation>
+
+
+		<wsdl:operation name="getXMLByObjectRequest">
+			<wsdl:input name="getXMLByObjectRequestRequest" message="cmsl:getXMLByObjectRequestRequest" />
+			<wsdl:output name="getXMLByObjectRequestResponse" message="cmsl:getXMLByObjectRequestResponse" />
+		</wsdl:operation>
+
+		<wsdl:operation name="getByXMLRequest">
+			<wsdl:input name="getByXMLRequestRequest" message="cmsl:getByXMLRequestRequest" />
+			<wsdl:output name="getByXMLRequestResponse" message="cmsl:getByXMLRequestResponse" />
+		</wsdl:operation>
+
+		<wsdl:operation name="getXMLByXMLRequest">
+			<wsdl:input name="getXMLByXMLRequestRequest" message="cmsl:getXMLByXMLRequestRequest" />
+			<wsdl:output name="getXMLByXMLRequestResponse" message="cmsl:getXMLByXMLRequestResponse" />
+		</wsdl:operation>
+	</wsdl:portType>
+
+	<wsdl:binding name="ContentManagementServiceSOAPBinding" type="cmsl:ContentManagementServicePortType">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+
+		<wsdl:operation name="getContentByID">
+			<soap:operation soapAction="getContentByID" />
+			<wsdl:input name="getContentByIDRequest">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="getContentByIDResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+
+		<wsdl:operation name="getChannelByID">
+			<soap:operation soapAction="getChannelByID" />
+			<wsdl:input name="getChannelByIDRequest">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="getChannelByIDResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+
+		<wsdl:operation name="getChannelByPath">
+			<soap:operation soapAction="getChannelByPath" />
+			<wsdl:input name="getChannelByPathRequest">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="getChannelByPathResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+
+		<wsdl:operation name="getByObjectRequest">
+			<soap:operation soapAction="getByObjectRequest" />
+			<wsdl:input name="getByObjectRequestRequest">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="getByObjectRequestResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+
+		<wsdl:operation name="getXMLByObjectRequest">
+			<soap:operation soapAction="getXMLByObjectRequest" />
+			<wsdl:input name="getXMLByObjectRequestRequest">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="getXMLByObjectRequestResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+
+		<wsdl:operation name="getByXMLRequest">
+			<soap:operation soapAction="getByXMLRequest" />
+			<wsdl:input name="getByXMLRequestRequest">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="getByXMLRequestResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+
+		<wsdl:operation name="getXMLByXMLRequest">
+			<soap:operation soapAction="getXMLByXMLRequest" />
+			<wsdl:input name="getXMLByXMLRequestRequest">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="getXMLByXMLRequestResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+
+	<wsdl:service name="ContentManagementService">
+
+		<wsdl:port name="ContentManagementServicePort" binding="cmsl:ContentManagementServiceSOAPBinding">
+			<soap:address location="http://localhost:9081/cmsl-war/services/ContentManagementServicePort" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,12 @@
+<env:Envelope xmlns:env="http://www.w3.org/2003/05/soap-envelope">
+ <env:Header>
+ </env:Header>
+ <env:Body>
+
+<cmsl:getContentByID xmlns:cmsl='http://www.massmutual.com/cmsl'>
+  <cmsl:CMSession cmsl:siteName='placeholder1' cmsl:siteKey='placeholder2' cmsl:skipCache='placeholder3' mode='placeholder4' />
+  <contentID>placeholder5</contentID>
+</cmsl:getContentByID>
+
+</env:Body>
+</env:Envelope>

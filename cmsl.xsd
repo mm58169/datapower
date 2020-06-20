@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:cmsl="http://www.massmutual.com/cmsl"
+	xmlns:jxb="http://java.sun.com/xml/ns/jaxb" targetNamespace="http://www.massmutual.com/cmsl"
+	attributeFormDefault="qualified" jxb:version="1.0">
+	<!--  
+		Copyright (c) 2007 Massachusetts Mutual Life Insurance Company. All rights reserved.
+		
+		EDIT THIS FILE IN ONLY FROM cmsl-model-jar/src/main/xsd
+		maven-remote-resources plugin will put this file to various locations 
+		from there!
+		
+	-->
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jxb:globalBindings fixedAttributeAsConstantProperty="true" generateIsSetMethod="true" />
+		</xsd:appinfo>
+	</xsd:annotation>
+
+
+	<!-- - - - - - - - - - -  REQUEST ELEMENTS - - - - - - - - - - - - -   -->
+	<xsd:element name="CMSession">
+		<xsd:complexType>
+			<xsd:attribute name="siteName" type="xsd:string" />
+			<xsd:attribute name="siteKey" type="xsd:string" />
+			<xsd:attribute name="skipCache" type="xsd:string" default="false"/>
+			<xsd:attribute ref="cmsl:mode" default="LIVE" />
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:attribute name="mode">
+		<xsd:simpleType>
+			<xsd:annotation>
+				<xsd:appinfo>
+					<jxb:typesafeEnumClass name="modeType" />
+				</xsd:appinfo>
+			</xsd:annotation>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="LIVE" />
+				<xsd:enumeration value="PREVIEW" />
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:attribute>
+
+	<xsd:element name="Request">
+		<xsd:annotation>
+			<xsd:documentation>
+				Request is a &quot;Holder&quot; of one of ChannelRequest or ContentRequest.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:choice>
+					<xsd:element ref="cmsl:ChannelRequest" minOccurs="0" maxOccurs="1" />
+					<xsd:element ref="cmsl:ContentRequest" minOccurs="0" maxOccurs="1" />
+				</xsd:choice>
+				<xsd:element ref="cmsl:TargetingFilter" minOccurs="0" maxOccurs="100" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="TargetingFilter">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="cmsl:Attribute" minOccurs="0" maxOccurs="100" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="Attribute">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="Name" type="xsd:string" minOccurs="1" maxOccurs="1" />
+				<xsd:element name="Value" type="xsd:string" minOccurs="1" maxOccurs="unbounded" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="ChannelRequest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="cmsl:RequestChannelItem" maxOccurs="unbounded" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="RequestChannelItem">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="cmsl:RequestContentType" minOccurs="0" maxOccurs="unbounded" />
+				<xsd:element ref="cmsl:ContentXPath" minOccurs="0" maxOccurs="1" />
+				<xsd:element ref="cmsl:ChannelXPath" minOccurs="0" maxOccurs="1" />
+			</xsd:sequence>
+			<xsd:attribute name="id" type="xsd:string" use="optional" />
+			<xsd:attribute name="path" type="xsd:string" use="optional" />
+			<xsd:attribute name="recursion" type="xsd:int" use="optional" />
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="RequestContentType">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="cmsl:WhereClause" minOccurs="0" maxOccurs="100" />
+			</xsd:sequence>
+			<xsd:attribute name="id" type="xsd:string" use="optional" />
+			<xsd:attribute name="name" type="xsd:string" use="optional" />
+			<xsd:attribute name="maxContentItemsReturned" type="xsd:int" use="optional" />
+			<xsd:attribute name="view" type="xsd:string" use="optional" />
+			<xsd:attribute name="sortField" type="xsd:string" use="optional" />
+			<xsd:attribute ref="cmsl:sortDirection" use="optional" />
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ContentXPath" type="xsd:string"/>
+	<xsd:element name="ChannelXPath" type="xsd:string"/>
+	<xsd:attribute name="sortDirection">
+		<xsd:simpleType>
+			<xsd:annotation>
+				<xsd:appinfo>
+					<jxb:typesafeEnumClass name="sortDirectionType" />
+				</xsd:appinfo>
+			</xsd:annotation>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="ASC" />
+				<xsd:enumeration value="DESC" />
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:attribute>
+
+	<xsd:element name="ContentRequest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="cmsl:RequestContentItem" maxOccurs="unbounded" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="RequestContentItem">
+		<xsd:complexType>
+			<xsd:attribute name="id" type="xsd:string" use="optional" />
+			<xsd:attribute name="view" type="xsd:string" use="optional" />
+			<xsd:attribute name="channelId" type="xsd:string" use="optional" />
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="WhereClause">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="Attribute" type="xsd:string" />
+				<xsd:element ref="cmsl:Operator" />
+				<xsd:element name="Value" type="xsd:string" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="Operator">
+		<xsd:simpleType>
+			<xsd:annotation>
+				<xsd:appinfo>
+					<jxb:typesafeEnumClass name="operatorType" />
+				</xsd:appinfo>
+			</xsd:annotation>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="EQ" />
+				<xsd:enumeration value="GT" />
+				<xsd:enumeration value="GTE" />
+				<xsd:enumeration value="LT" />
+				<xsd:enumeration value="LTE" />
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+
+	<!-- - - - - - - - - - -     RESPONSE ELEMENTS - - - - - - - - - - - - -   -->
+	<xsd:element name="Response">
+		<xsd:annotation>
+			<xsd:documentation>
+				Response is a &quot;Holder&quot; of ResponseChannelItem elements and ResponseContentItem elements.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="cmsl:ResponseChannelItem" minOccurs="0" maxOccurs="unbounded" />
+				<xsd:element ref="cmsl:ResponseContentItem" minOccurs="0" maxOccurs="unbounded" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="ResponseChannelItem">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="cmsl:ChannelMap" />
+				<xsd:element ref="cmsl:ResponseChannelItem" minOccurs="0" maxOccurs="unbounded" />
+				<xsd:element ref="cmsl:ResponseContentItem" minOccurs="0" maxOccurs="unbounded" />
+			</xsd:sequence>
+			<xsd:attribute name="id" type="xsd:string" use="required" />
+			<xsd:attribute name="name" type="xsd:string" use="required" />
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="ChannelMap">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="cmsl:Tier" minOccurs="0" maxOccurs="unbounded" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="Tier">
+		<xsd:complexType>
+			<xsd:attribute name="sortOrder" type="xsd:int" use="required" />
+			<xsd:attribute name="channelID" type="xsd:string" use="required" />
+			<xsd:attribute name="channelName" type="xsd:string" use="required" />
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="ResponseContentItem">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="cmsl:ContentMap" />
+				<xsd:element ref="cmsl:ChannelMap" />
+				<xsd:element ref="cmsl:Rules" />
+			</xsd:sequence>
+			<xsd:attribute name="id" type="xsd:string" use="required" />
+			<xsd:attribute name="contentTypeID" type="xsd:string" use="required" />
+			<xsd:attribute name="contentTypeName" type="xsd:string" use="required" />
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:element name="ContentMap">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="cmsl:Entry" minOccurs="0" maxOccurs="unbounded"></xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:element name="Rules">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="cmsl:Rule" minOccurs="0" maxOccurs="unbounded"></xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:element name="Rule">
+		<xsd:complexType>
+			<xsd:attribute name="value" type="xsd:string" />
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:element name="Entry">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="Key" type="xsd:string" minOccurs="1" maxOccurs="1" />
+				<xsd:element name="Value" type="xsd:string" minOccurs="1" maxOccurs="1" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+</xsd:schema>
