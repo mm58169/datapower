@@ -4,8 +4,8 @@
  <env:Body>
 
 <cmsl:getContentByID xmlns:cmsl='http://www.massmutual.com/cmsl'>
-  <cmsl:CMSession cmsl:siteName='placeholder1' cmsl:siteKey='placeholder2' cmsl:skipCache='placeholder3' mode='placeholder4' />
-  <contentID>placeholder5</contentID>
+  <cmsl:CMSession cmsl:siteName='eworksite' cmsl:siteKey='1c2830c15cf01110VgnVCM100000cb7406aa____' cmsl:skipCache='yes' mode='placeholder4' />
+  <contentID>801c2947426ab210VgnVCM100000c06a06aa____</contentID>
 </cmsl:getContentByID>
 
 </env:Body>
